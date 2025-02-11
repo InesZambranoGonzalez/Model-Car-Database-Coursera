@@ -1,13 +1,5 @@
 
-
-SELECT  
-	warehouses.warehouseCode,
-	products.quantityInStock,
-    products.productCode,
-    products.MSRP-products.buyPrice as profit
-FROM warehouses
-INNER JOIN products ON warehouses.warehouseCode = products.warehouseCode;
-
+/* */
 SELECT 
     warehouses.warehouseCode,
     warehouses.warehousePctCap,
@@ -17,6 +9,18 @@ SELECT
 FROM warehouses
 INNER JOIN products ON warehouses.warehouseCode = products.warehouseCode
 GROUP BY warehouses.warehouseCode;
+
+/* */
+SELECT
+	products.MSRP,
+	orderdetails.productCode,
+    COUNT(orderdetails.orderNumber) AS total_times_bought
+FROM orderdetails
+INNER JOIN products ON orderdetails.productCode = products.productCode
+GROUP BY orderdetails.productCode 
+ORDER BY total_times_bought DESC; 
+	
+	
 
 
 
